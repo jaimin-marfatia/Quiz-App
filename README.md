@@ -1,1 +1,1 @@
-This is a simple Quiz App made using Angular!
+This is a simple Quiz App made using Angular!!
