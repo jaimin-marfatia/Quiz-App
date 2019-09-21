@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.css']
+  selector: "app-result",
+  templateUrl: "./result.component.html",
+  styleUrls: ["./result.component.css"]
 })
 export class ResultComponent implements OnInit {
+  result: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.result = localStorage.getItem("result");
   }
-
 }

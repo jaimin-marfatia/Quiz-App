@@ -10,10 +10,14 @@ import { Router } from "@angular/router";
 export class QuizComponent implements OnInit {
   questions: Question[];
   queProgress: number = 0;
+  correctAns: number = 0;
 
   constructor(public router: Router) {}
 
   ngOnInit() {
+    localStorage.setItem("result", ""); // initialize to empty
+    this.correctAns = 0;
+
     this.questions = [
       {
         id: 1,
@@ -37,11 +41,23 @@ export class QuizComponent implements OnInit {
   }
 
   Answer(quesId, choice) {
-    console.log(quesId, choice);
+    this.SetResult(quesId, choice);
     this.queProgress++;
 
     if (this.queProgress === 3) {
+      localStorage.setItem("result", this.correctAns.toString());
       this.router.navigate(["result"]);
+    }
+  }
+
+  SetResult(quesId, choice) {
+    // get question you are on
+    let rightAnswer = this.questions[quesId - 1].answer;
+    // get user's selection
+    let userSelection = this.questions[quesId - 1].options[choice];
+
+    if (rightAnswer === userSelection) {
+      localStorage.setItem("result", (this.correctAns++).toString());
     }
   }
 }
